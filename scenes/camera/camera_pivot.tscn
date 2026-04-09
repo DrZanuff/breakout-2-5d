@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cwj1hqj3nfu2m"]
+
+[ext_resource type="Texture2D" uid="uid://da2mp5g5yky2r" path="res://eso0932a.jpg" id="1_643bh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ibhhp"]
+panorama = ExtResource("1_643bh")
+
+[sub_resource type="Sky" id="Sky_r8fno"]
+sky_material = SubResource("PanoramaSkyMaterial_ibhhp")
+
+[sub_resource type="Environment" id="Environment_6aoj4"]
+background_mode = 2
+sky = SubResource("Sky_r8fno")
+
+[node name="CameraPivot" type="Marker3D" unique_id=2019571904]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1560117173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50.574364)
+environment = SubResource("Environment_6aoj4")
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1313971546]
+light_color = Color(0.8860108, 0.9782329, 0.99999994, 1)
+light_energy = 15.948
+light_indirect_energy = 3.277
+light_volumetric_fog_energy = 1.871
+light_size = 0.058
+spot_range = 69.46065
+spot_angle = 28.964634

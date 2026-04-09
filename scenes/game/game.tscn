@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://gocogaca0tis"]
+
+[ext_resource type="PackedScene" uid="uid://ds31cmuj4d7ac" path="res://scenes/player/player_body_2d.tscn" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://cnj440gemgoha" path="res://scenes/ball/ball.tscn" id="2_ball"]
+[ext_resource type="Shader" uid="uid://ed8qjfvmeony" path="res://scenes/game/glass-blur.gdshader" id="2_kelw5"]
+[ext_resource type="Script" uid="uid://b5g7vcsea71tr" path="res://scenes/game/game.gd" id="3_game"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfrn8"]
+shader = ExtResource("2_kelw5")
+shader_parameter/blur_strength = 4.20000006258504
+shader_parameter/tint_intensity = 1.05000001564626
+shader_parameter/frosted_boost = 0.08999999798832
+
+[sub_resource type="Gradient" id="Gradient_0sr1o"]
+offsets = PackedFloat32Array(0, 0.5502008, 1)
+colors = PackedColorArray(0, 0, 0, 0.83137256, 0.13161667, 0.13161667, 0.13161667, 0.70622885, 0, 0, 0, 0.73333335)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kelw5"]
+gradient = SubResource("Gradient_0sr1o")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifgtf"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sul5r"]
+size = Vector2(1193, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_death"]
+size = Vector2(1180, 40)
+
+[node name="Game" type="Node2D" unique_id=1685095574]
+script = ExtResource("3_game")
+
+[node name="GlassBlur" type="TextureRect" parent="." unique_id=818900546]
+material = SubResource("ShaderMaterial_lfrn8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 1172.0
+offset_bottom = 693.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kelw5")
+
+[node name="Boundaries" type="Marker2D" parent="." unique_id=1292207563]
+
+[node name="StaticBodySideLeft" type="StaticBody2D" parent="Boundaries" unique_id=222313355]
+position = Vector2(-11, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/StaticBodySideLeft" unique_id=2144937044]
+position = Vector2(0, 324)
+shape = SubResource("RectangleShape2D_ifgtf")
+
+[node name="StaticBodySideRight" type="StaticBody2D" parent="Boundaries" unique_id=565888525]
+position = Vector2(1162, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/StaticBodySideRight" unique_id=651175992]
+position = Vector2(0, 324)
+shape = SubResource("RectangleShape2D_ifgtf")
+
+[node name="StaticBodyTop" type="StaticBody2D" parent="Boundaries" unique_id=418551737]
+position = Vector2(-1, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/StaticBodyTop" unique_id=252811950]
+position = Vector2(576.5, 0)
+shape = SubResource("RectangleShape2D_sul5r")
+
+[node name="PlayerBody2D" parent="." unique_id=474186674 instance=ExtResource("1_sul5r")]
+position = Vector2(576, 593)
+
+[node name="Ball" parent="." unique_id=758734626 instance=ExtResource("2_ball")]
+position = Vector2(576, 557)
+
+[node name="Bricks" type="Node2D" parent="." unique_id=1662856358]
+
+[node name="DeathZone" type="Area2D" parent="." unique_id=367140568]
+position = Vector2(576, 668)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=447133402]
+shape = SubResource("RectangleShape2D_death")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=601457990]
+
+[node name="StatusLabel" type="Label" parent="UI" unique_id=2087253512]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 1140.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 20

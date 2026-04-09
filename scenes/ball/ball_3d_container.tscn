@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://27qtgqaiiqxr"]
+
+[ext_resource type="Gradient" uid="uid://crbortvglo7gq" path="res://scenes/ball/ball_gradient.tres" id="1_mmctr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_nv6q1"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xotqv"]
+gradient = ExtResource("1_mmctr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbgth"]
+albedo_texture = SubResource("GradientTexture2D_xotqv")
+uv1_scale = Vector3(2, 2, 2)
+uv1_triplanar = true
+uv1_world_triplanar = false
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nv6q1"]
+
+[sub_resource type="Sky" id="Sky_stoaj"]
+sky_material = SubResource("ProceduralSkyMaterial_nv6q1")
+
+[sub_resource type="Environment" id="Environment_xotqv"]
+background_mode = 2
+sky = SubResource("Sky_stoaj")
+
+[node name="Ball3DContainer" type="Node3D" unique_id=1760937208]
+
+[node name="Ball3D" type="MeshInstance3D" parent="." unique_id=182895820]
+unique_name_in_owner = true
+mesh = SubResource("SphereMesh_nv6q1")
+surface_material_override/0 = SubResource("StandardMaterial3D_jbgth")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1665883969]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.8724995, 0)
+environment = SubResource("Environment_xotqv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=468991650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5840049, 0)
+omni_range = 5.2185884
