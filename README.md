@@ -1,5 +1,8 @@
 # Breakout 2.5D
 
+<img width="1213" height="681" alt="image" src="https://github.com/user-attachments/assets/f02ef9ed-43c4-4fdf-89d2-04adc1047f56" />
+
+
 A **Breakout**-style game built in **Godot 4.6**. Gameplay runs on a 2D playfield (paddle, bricks, walls), while the ball is rendered as a **3D sphere** in a viewport and rolls to match its 2D motion—hence the “2.5D” look.
 
 ## How to play
