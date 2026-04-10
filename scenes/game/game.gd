@@ -1,6 +1,7 @@
 extends Node2D
 
 const BRICK_SCENE := preload("res://scenes/brick/brick.tscn")
+const BRICK_PARTICLE_SCENE := preload("res://scenes/brick/particle.tscn")
 
 @onready var player: Player = $PlayerBody2D
 @onready var ball: Ball = $Ball
@@ -29,7 +30,13 @@ func _ready() -> void:
 	await _spawn_bricks()
 	ball.setup(player)
 	_update_status()
+	ball.brick_collision.connect(_create_particle)
 
+func _create_particle(position: Vector2, color: Brick.COLORS):
+	var particle: BrickParticle = BRICK_PARTICLE_SCENE.instantiate() as BrickParticle
+	particle.position = position
+	particle.set_particle_color(color)
+	bricks_root.add_child(particle)
 
 func _ensure_default_inputs() -> void:
 	var bindings: Dictionary = {

@@ -31,6 +31,8 @@ func _ready() -> void:
 	_current_color = randi_range(COLORS.BLUE, COLORS.WHITE) as COLORS
 	_sprite.play("%s_idle" % _colors_map[_current_color])
 
+func get_current_color() -> COLORS:
+	return _current_color
 
 func hit() -> void:
 	if _gone:

@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Ball
 
 signal launched
+signal brick_collision(position: Vector2, color: Brick.COLORS)
 
 ## Path into instanced `ball_3d_container.tscn` — %Ball3D does not resolve from this scene root.
 @onready var ball_3d: MeshInstance3D = $SubViewport/Ball3DContainer/Ball3D
@@ -72,9 +73,11 @@ func _physics_process(delta: float) -> void:
 
 	var collider := col.get_collider()
 	var normal := col.get_normal()
-
+	var collider_position := col.get_position()
+	
 	if collider is Brick:
 		(collider as Brick).hit()
+		brick_collision.emit(collider_position, collider.get_current_color())
 		velocity = velocity.bounce(normal)
 	elif collider is Player:
 		_bounce_off_paddle(col)
